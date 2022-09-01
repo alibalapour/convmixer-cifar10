@@ -84,12 +84,12 @@ test_transform = transforms.Compose([
 trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
                                         download=True, transform=train_transform)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=args.batch_size,
-                                          shuffle=True, num_workers=args.workers)
+                                          shuffle=True, num_workers=args.workers, pin_memory=True)
 
 testset = torchvision.datasets.CIFAR10(root='./data', train=False,
                                        download=True, transform=test_transform)
 testloader = torch.utils.data.DataLoader(testset, batch_size=args.batch_size,
-                                         shuffle=False, num_workers=args.workers)
+                                         shuffle=False, num_workers=args.workers, pin_memory=True)
 
 
 model = ConvMixer(args.hdim, args.depth, patch_size=args.psize, kernel_size=args.conv_ks, n_classes=10)
