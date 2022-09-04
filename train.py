@@ -142,3 +142,4 @@ for epoch in range(args.epochs):
 
     print(f'[{args.name}] Epoch: {epoch} | Train Acc: {train_acc/n:.4f}, Test Acc: {test_acc/m:.4f}, Time: {time.time() - start:.1f}, lr: {lr:.6f}')
 
+torch.save(model.state_dict(), 'model.pth')
