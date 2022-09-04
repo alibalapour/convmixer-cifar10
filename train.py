@@ -101,8 +101,8 @@ if args.resume:
     model.train()
 
 
-lr_schedule = lambda t: np.interp([t], [0, args.epochs*1//5, args.epochs*2//5, args.epochs], 
-                                  [0, args.lr_max, args.lr_max/20.0, 0])[0]
+lr_schedule = lambda t: np.interp([t], [0, args.epochs*1//10, args.epochs*2//10, args.epochs], 
+                                  [0, args.lr_max, args.lr_max/40.0, 0])[0]
 
 opt = optim.AdamW(model.parameters(), lr=args.lr_max, weight_decay=args.wd)
 criterion = nn.CrossEntropyLoss()
