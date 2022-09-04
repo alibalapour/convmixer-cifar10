@@ -96,7 +96,7 @@ model = ConvMixer(args.hdim, args.depth, patch_size=args.psize, kernel_size=args
 model = nn.DataParallel(model).cuda()
 
 
-lr_schedule = lambda t: np.interp([t], [0, args.epochs*2//5, args.epochs*4//5, args.epochs], 
+lr_schedule = lambda t: np.interp([t], [0, args.epochs*1//5, args.epochs*2//5, args.epochs], 
                                   [0, args.lr_max, args.lr_max/20.0, 0])[0]
 
 opt = optim.AdamW(model.parameters(), lr=args.lr_max, weight_decay=args.wd)
