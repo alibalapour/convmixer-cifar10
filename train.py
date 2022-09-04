@@ -29,6 +29,7 @@ parser.add_argument('--clip-norm', action='store_true')
 parser.add_argument('--epochs', default=25, type=int)
 parser.add_argument('--lr-max', default=0.01, type=float)
 parser.add_argument('--workers', default=2, type=int)
+parser.add_argument('--resume', default=None, type=str)
 
 args = parser.parse_args()
 
@@ -94,6 +95,10 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=args.batch_size,
 
 model = ConvMixer(args.hdim, args.depth, patch_size=args.psize, kernel_size=args.conv_ks, n_classes=10)
 model = nn.DataParallel(model).cuda()
+
+if args.resume:
+    model.load_state_dict(torch.load(args.resume))
+    model.train()
 
 
 lr_schedule = lambda t: np.interp([t], [0, args.epochs*1//5, args.epochs*2//5, args.epochs], 
